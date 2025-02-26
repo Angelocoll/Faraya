@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Faraya.css";
 import logo from "../assets/Farayah-Logo-removebg.png";
-import backvideo from "../assets/newone.webm?hash";
+import backvideo from "../assets/newone.webm";
 import menu from "../assets/Faraya.pdf";
 import portfolio from "../assets/Faraya-Port.png";
 
@@ -17,14 +17,6 @@ const FarayaEvent = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
-  const [videoLoaded, setVideoLoaded] = useState(false);
-
-useEffect(() => {
-  if (!videoLoaded) {
-    setVideoLoaded(true);
-  }
-}, [videoLoaded]);
 
   useEffect(() => {
     const handleScroll = () => {
