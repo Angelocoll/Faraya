@@ -114,7 +114,7 @@ const FarayaEvent = () => {
         </div>
       </nav>
       <header  id="home" ref={homeSectionRef} className="hero">
-        <video ref={videoRef} preload="auto" autoPlay loop muted playsinline className="hero-video">
+        <video ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video">
           <source src={backvideo} />
           Din webbläsare stöder inte videouppspelning.
         </video>
