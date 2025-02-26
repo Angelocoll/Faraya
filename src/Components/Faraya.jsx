@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Faraya.css";
 import logo from "../assets/Farayah-Logo-removebg.png";
-import backvideo from "../assets/newone.webm";
+import backvideo from "../assets/newone.mp4";
 import menu from "../assets/Faraya.pdf";
 import portfolio from "../assets/Faraya-port.png";
 
@@ -76,7 +76,7 @@ const FarayaEvent = () => {
           </div>
       <header className="hero">
         <video preload="auto" autoPlay loop muted playsInline className="hero-video">
-          <source src={backvideo} type="video/webm" />
+          <source src={backvideo}/>
           Din webbläsare stöder inte videouppspelning.
         </video>
 
