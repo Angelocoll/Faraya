@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../Faraya.css";
 import logo from "../assets/Farayah-Logo-removebg.png";
 import backvideo from "../assets/newone.mp4";
@@ -9,6 +9,49 @@ const FarayaEvent = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navBackground, setNavBackground] = useState(false);
+
+  const videoRef = useRef(null);
+
+  // Funktion som startar videon om den inte spelas upp automatiskt
+  const startVideoIfNotPlaying = () => {
+    // Kolla om videon har startat
+    if (videoRef.current && videoRef.current.paused) {
+      videoRef.current.play()
+        .then(() => {
+          console.log('Video spelas upp!');
+        })
+        .catch((error) => {
+          console.error('Fel när videon försökte starta:', error);
+        });
+    }
+  };
+
+  useEffect(() => {
+    // Vänta på att videon ska ha laddats
+    const videoElement = videoRef.current;
+
+    // När sidan är klar att laddas, kontrollera video-status
+    if (videoElement) {
+      // Försök att starta videon direkt (autoplay)
+      videoElement.play()
+        .then(() => {
+          console.log('Video spelas upp automatiskt!');
+        })
+        .catch((error) => {
+          console.error('Autoplay misslyckades, försök manuellt:', error);
+          // Om autoplay misslyckas, kör startVideoIfNotPlaying
+          startVideoIfNotPlaying();
+        });
+    }
+
+    const timeout = setTimeout(() => {
+      startVideoIfNotPlaying();
+    }, 1000); // Försök att starta videon efter 2 sekunder om den inte startade.
+
+    return () => {
+      clearTimeout(timeout); // Rensa timeout om komponenten tas bort
+    };
+  }, []);
 
   const toggleFAQ = (index) => {
     setOpenFAQ(openFAQ === index ? null : index);
@@ -75,7 +118,7 @@ const FarayaEvent = () => {
     style={{ cursor: "pointer" }}></i>
           </div>
       <header className="hero">
-        <video preload="auto" autoPlay loop muted playsInline className="hero-video">
+        <video ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video">
           <source src={backvideo}/>
           Din webbläsare stöder inte videouppspelning.
         </video>
