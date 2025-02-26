@@ -117,6 +117,12 @@ const FarayaEvent = () => {
           </ul>
         </div>
       </nav>
+      <div className="socials">
+          <i className="fab fa-instagram"  onClick={() => window.open("https://www.instagram.com/faraya.stockholm/", "_blank")}
+    style={{ cursor: "pointer" }}></i>
+          <i className="fab fa-tiktok" onClick={() => window.open("https://www.tiktok.com/@faraya.stockholm", "_blank")}
+    style={{ cursor: "pointer" }}></i>
+          </div>
       <header  id="home" ref={homeSectionRef} className="hero">
         <video ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video">
           <source src={backvideo} />
