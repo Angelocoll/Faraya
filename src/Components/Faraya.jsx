@@ -75,16 +75,10 @@ const FarayaEvent = () => {
     style={{ cursor: "pointer" }}></i>
           </div>
       <header className="hero">
-      <iframe 
-  width="100%" 
-  height="100%" 
-  src="https://www.youtube.com/embed/48xfIR1x25Q?autoplay=1&mute=1&playsinline=1" 
-  frameBorder="0" 
-  allow="autoplay; fullscreen" 
-  allowFullScreen
-></iframe>
-
-
+        <video preload="auto" autoPlay loop muted playsInline className="hero-video">
+          <source src={backvideo}/>
+          Din webbläsare stöder inte videouppspelning.
+        </video>
         <div className="hero-content">
           <div className="logo"><img src={logo} alt="Farayas logo" /></div>
           <button onClick={() => window.open("https://app.bokabord.se/reservation/?hash=cb2befb6ee8bf3ce782aee340dcdd0ed&version=new&mealid=47167&fbclid=PAZXh0bgNhZW0CMTEAAaZHG1wlEWO-sLxN-_PXlvIqn3boIeZagUFslAQspAYe0e0gYUbsou6b1rc_aem_3rjD3fidNy-cMGfdU1w8FA")} className="cta-button">Boka Bord</button>
