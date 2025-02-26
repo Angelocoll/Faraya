@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Faraya.css";
 import logo from "../assets/Farayah-Logo-removebg.png";
-import backvideo from "../assets/new.mp4";
+import backvideo from "../assets/m.mp4";
 import menu from "../assets/Faraya.pdf";
 import portfolio from "../assets/Faraya-port.png";
 
