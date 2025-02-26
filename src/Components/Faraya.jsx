@@ -10,48 +10,13 @@ const FarayaEvent = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navBackground, setNavBackground] = useState(false);
 
-  const videoRef = useRef(null);
-
-  // Funktion som startar videon om den inte spelas upp automatiskt
-  const startVideoIfNotPlaying = () => {
-    // Kolla om videon har startat
-    if (videoRef.current && videoRef.current.paused) {
-      videoRef.current.play()
-        .then(() => {
-          console.log('Video spelas upp!');
-        })
-        .catch((error) => {
-          console.error('Fel när videon försökte starta:', error);
-        });
+  window.addEventListener('load', function() {
+    var video = document.getElementById('minVideo');
+    if (video) {
+      video.muted = true; // Sätt video till muted
+      video.play(); // Försök att spela upp videon
     }
-  };
-
-  useEffect(() => {
-    // Vänta på att videon ska ha laddats
-    const videoElement = videoRef.current;
-
-    // När sidan är klar att laddas, kontrollera video-status
-    if (videoElement) {
-      // Försök att starta videon direkt (autoplay)
-      videoElement.play()
-        .then(() => {
-          console.log('Video spelas upp automatiskt!');
-        })
-        .catch((error) => {
-          console.error('Autoplay misslyckades, försök manuellt:', error);
-          // Om autoplay misslyckas, kör startVideoIfNotPlaying
-          startVideoIfNotPlaying();
-        });
-    }
-
-    const timeout = setTimeout(() => {
-      startVideoIfNotPlaying();
-    }, 3000); // Försök att starta videon efter 2 sekunder om den inte startade.
-
-    return () => {
-      clearTimeout(timeout); // Rensa timeout om komponenten tas bort
-    };
-  }, []);
+  });
 
   const toggleFAQ = (index) => {
     setOpenFAQ(openFAQ === index ? null : index);
@@ -118,7 +83,7 @@ const FarayaEvent = () => {
     style={{ cursor: "pointer" }}></i>
           </div>
       <header className="hero">
-        <video ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video">
+        <video id="minVideo" preload="auto" autoPlay loop muted playsInline className="hero-video">
           <source src={backvideo}/>
           Din webbläsare stöder inte videouppspelning.
         </video>
