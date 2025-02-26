@@ -166,9 +166,17 @@ footer,
   flex-wrap: wrap;
   align-items: center;
   padding: 50px;
-  min-height: 90vh;
+  min-height: 95vh;
+  padding-top: 120px;
   justify-content: space-around;
   position: relative;
+}
+a {
+  color: white;
+}
+a:hover {
+  color: #b8a876;
+  cursor: pointer;
 }
 
 .event-text {
@@ -244,22 +252,32 @@ p {
 
 /* Galleri */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
   gap: 20px;
-  padding: 50px 0;
+  flex-direction: row;
+  padding: 50px 40px;
+  overflow-x: scroll;
+  min-height: 90vh;
+}
+.gallery div {
+  min-width: 33%;
+  min-height: 100%;
+  max-height: 100%;
 }
 
 .gallery img {
   width: 100%;
-  height: auto;
-  border-radius: 10px;
+  height: 100%;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: #1b1b1b 8px 8px 20px 2px;
 }
 
 /* FAQ */
 .faq {
   padding: 50px 0;
   text-align: center;
+  min-height: 80vh;
 }
 
 .faq-item {
@@ -302,7 +320,7 @@ footer {
   text-align: center;
   padding-bottom: 20px;
 }
-footer div {
+.gradient {
   width: 100%;
   margin-bottom: 20px;
   height: 1px;
@@ -314,6 +332,9 @@ footer div {
     #b8a876 75%,
     #090b0a 100%
   );
+}
+.event-section .gradient {
+  margin: 0;
 }
 
 .logon img {
