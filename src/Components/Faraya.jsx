@@ -10,13 +10,9 @@ const FarayaEvent = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navBackground, setNavBackground] = useState(false);
 
-  window.addEventListener('load', function() {
-    var video = document.getElementById('minVideo');
-    if (video) {
-      video.muted = true; // Sätt video till muted
-      video.play(); // Försök att spela upp videon
-    }
-  });
+  const videoRef = useRef(null);
+
+
 
   const toggleFAQ = (index) => {
     setOpenFAQ(openFAQ === index ? null : index);
@@ -36,6 +32,15 @@ const FarayaEvent = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
+
+    // För att tvinga videon att spela
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true; // Sätt video till muted
+      video.play().catch((error) => {
+        console.error("Autoplay failed: ", error);
+      });
+    }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -83,7 +88,7 @@ const FarayaEvent = () => {
     style={{ cursor: "pointer" }}></i>
           </div>
       <header className="hero">
-        <video id="minVideo" preload="auto" autoPlay loop muted playsInline className="hero-video">
+        <video id="minVideo" ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video">
           <source src={backvideo}/>
           Din webbläsare stöder inte videouppspelning.
         </video>
