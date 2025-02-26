@@ -3,7 +3,7 @@ import "../Faraya.css";
 import logo from "../assets/Farayah-Logo-removebg.png";
 import backvideo from "../assets/newone.webm";
 import menu from "../assets/Faraya.pdf";
-import portfolio from "../assets/Faraya-Port.png";
+import portfolio from "../assets/Faraya-port.png";
 
 const FarayaEvent = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
