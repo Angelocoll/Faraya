@@ -75,10 +75,15 @@ const FarayaEvent = () => {
     style={{ cursor: "pointer" }}></i>
           </div>
       <header className="hero">
-        <video preload="auto" autoPlay loop muted playsInline className="hero-video">
-          <source src={backvideo}/>
-          Din webbläsare stöder inte videouppspelning.
-        </video>
+      <iframe 
+  width="100%" 
+  height="100%" 
+  src="https://www.youtube.com/embed/48xfIR1x25Q?autoplay=1&mute=1&playsinline=1" 
+  frameBorder="0" 
+  allow="autoplay; fullscreen" 
+  allowFullScreen
+></iframe>
+
 
         <div className="hero-content">
           <div className="logo"><img src={logo} alt="Farayas logo" /></div>
