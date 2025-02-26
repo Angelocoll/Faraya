@@ -37,6 +37,7 @@ const FarayaEvent = () => {
     sectionRef.current.scrollIntoView({
       behavior: "smooth",
     });
+    setMenuOpen(false);
   };
 
   const toggleFAQ = (index) => {
@@ -85,7 +86,9 @@ const FarayaEvent = () => {
               <a href="#home" onClick={(e) => handleScroll(e, homeSectionRef)}>Hem</a>
             </li>
             <span> | </span>
-            <li onClick={() => window.open(menu, "_blank")}>Meny</li>
+            <li onClick={() => {window.open(menu, "_blank"); 
+              setMenuOpen(false);
+              }}>Meny</li>
             <span> | </span>
             <li>
               <a href="#event-section" onClick={(e) => handleScroll(e, eventSectionRef)}>Om Oss</a>
@@ -100,12 +103,13 @@ const FarayaEvent = () => {
             </li>
             <span> | </span>
             <li
-              onClick={() =>
+              onClick={() => {
                 window.open(
                   "https://app.bokabord.se/reservation/?hash=cb2befb6ee8bf3ce782aee340dcdd0ed&version=new&mealid=47167&fbclid=PAZXh0bgNhZW0CMTEAAaZHG1wlEWO-sLxN-_PXlvIqn3boIeZagUFslAQspAYe0e0gYUbsou6b1rc_aem_3rjD3fidNy-cMGfdU1w8FA",
                   "_blank"
                 )
-              }
+                setMenuOpen(false);
+              }}
               className="cta-button"
             >
               Boka Bord
@@ -118,6 +122,7 @@ const FarayaEvent = () => {
           <source src={backvideo} />
           Din webbläsare stöder inte videouppspelning.
         </video>
+        
         <div className="hero-content">
           <div className="logo">
             <img src={logo} alt="Farayas logo" />

@@ -418,7 +418,7 @@ footer {
     transform: translateX(-50%); /* Adjust for perfect centering */
     background-color: #090b0a; /* Set a background color (for visibility) */
     z-index: 1000; /* Make sure it stays on top of other content */
-    padding-top: 50px; /* Add space from the top */
+
     margin: 0;
     justify-content: center;
   }
@@ -428,7 +428,7 @@ footer {
   .navbar-links ul {
     display: block; /* This ensures that the links are displayed when the menu is open */
     padding: 0; /* Optional, to remove any extra spacing */
-    height: 60%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -445,13 +445,26 @@ footer {
   .event-section {
     flex-direction: column;
     text-align: center;
+    padding-bottom: 100px;
   }
 
   .event-text {
-    padding: 0 20px;
+    padding: 10px;
+    max-width: 100%;
+    margin-bottom: 40px;
+  }
+  .event-image {
+    justify-content: center;
   }
 
   .faq-item {
     width: 100%;
+  }
+  .highlight {
+    width: 110%;
+    right: -50px;
+  }
+  .gallery div {
+    min-width: 100%;
   }
 }
