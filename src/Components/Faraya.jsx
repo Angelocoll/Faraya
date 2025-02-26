@@ -114,9 +114,7 @@ const FarayaEvent = () => {
       </section>
 
       <section className="gallery">
-        <img src="/image1.jpg" alt="Gallery Image 1" />
-        <img src="/image2.jpg" alt="Gallery Image 2" />
-        <img src="/image3.jpg" alt="Gallery Image 3" />
+     
       </section>
 
       <section className="faq">
