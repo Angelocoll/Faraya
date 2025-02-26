@@ -46,7 +46,7 @@ const FarayaEvent = () => {
 
     const timeout = setTimeout(() => {
       startVideoIfNotPlaying();
-    }, 1000); // Försök att starta videon efter 2 sekunder om den inte startade.
+    }, 3000); // Försök att starta videon efter 2 sekunder om den inte startade.
 
     return () => {
       clearTimeout(timeout); // Rensa timeout om komponenten tas bort
