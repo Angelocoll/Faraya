@@ -9,8 +9,25 @@ const FarayaEvent = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navBackground, setNavBackground] = useState(false);
+  const videoRef = useRef(null); // Använd useRef för att referera till videon
 
-  const videoRef = useRef(null);
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (video) {
+      // Logga om videon är mutad eller inte
+      console.log("Video is muted: ", video.muted);
+
+      // Försök att spela upp videon när sidan laddas och sätt den på mutad
+      video.muted = true; // Se till att videon är mutad för autoplay
+      video.play().then(() => {
+        console.log("Video started playing");
+      }).catch((error) => {
+        console.log("Autoplay failed:", error);
+      });
+    }
+  }, []);
+
 
 
 
@@ -33,18 +50,11 @@ const FarayaEvent = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // För att tvinga videon att spela
-    const video = videoRef.current;
-    if (video) {
-      video.muted = true; // Sätt video till muted
-      video.play().catch((error) => {
-        console.error("Autoplay failed: ", error);
-      });
-    }
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+
+    
   }, []);
 
   return (
@@ -88,7 +98,7 @@ const FarayaEvent = () => {
     style={{ cursor: "pointer" }}></i>
           </div>
       <header className="hero">
-        <video id="minVideo" ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video">
+        <video ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video">
           <source src={backvideo}/>
           Din webbläsare stöder inte videouppspelning.
         </video>
