@@ -383,7 +383,7 @@ footer {
 .navbar .hamburger-icon span {
   width: 30px;
   height: 3px;
-  background: linear-gradient(to bottom, #090b0a, #b8a876, #494031);
+  background: linear-gradient(to left, #090b0a, #b8a876, #494031);
   transition: 0.3s;
 }
 
