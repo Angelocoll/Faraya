@@ -282,7 +282,7 @@ p {
 
 /* FAQ */
 .faq {
-  padding: 50px 0;
+  padding: 50px 20px;
   text-align: center;
   min-height: 80vh;
 }
@@ -300,7 +300,7 @@ p {
   color: #fafafa;
 }
 .fa-instagram {
-  background: linear-gradient(to bottom, #090b0a, #b8a876, #494031);
+  background: linear-gradient(to top, #090b0a, #b8a876, #494031);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -318,6 +318,9 @@ p {
 
 .faq-item:hover {
   background: #444;
+}
+.phone {
+  margin-bottom: 20px;
 }
 
 .faq-question {
@@ -471,7 +474,7 @@ footer {
   .event-text {
     padding: 10px;
     max-width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
   }
   .event-image {
     justify-content: center;

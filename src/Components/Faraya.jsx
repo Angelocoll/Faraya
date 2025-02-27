@@ -229,8 +229,9 @@ const FarayaEvent = () => {
       </section>
 
       <footer>
+        <p className="phone">Faraya: 076 xxx xx xx</p>
         <div className="gradient"></div>
-        <p>@ 2025 Farayah | Farayah: 076 xxx xx xx</p>
+        <p>@ 2025 Faraya</p>
       </footer>
     </div>
   );
