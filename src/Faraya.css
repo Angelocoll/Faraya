@@ -17,6 +17,13 @@ body {
   width: 100%;
   overflow-x: hidden;
 }
+.shadow {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
 
 @keyframes slideDown {
   0% {

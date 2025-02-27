@@ -124,6 +124,7 @@ const FarayaEvent = () => {
     style={{ cursor: "pointer" }}></i>
           </div>
       <header  id="home" ref={homeSectionRef} className="hero">
+        <div className="shadow"></div>
         <video ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video">
           <source src={backvideo} />
           Din webbläsare stöder inte videouppspelning.
