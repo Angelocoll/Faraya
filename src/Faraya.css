@@ -297,7 +297,20 @@ p {
   border: 1px solid #fafafa;
 }
 .fa-instagram:hover {
-  color: #b8a876;
+  color: #fafafa;
+}
+.fa-instagram {
+  background: linear-gradient(to bottom, #090b0a, #b8a876, #494031);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.fa-tiktok {
+  background: linear-gradient(to bottom, #090b0a, #b8a876, #494031);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #424242;
 }
 .fa-tiktok:hover {
   color: #424242;
@@ -367,7 +380,7 @@ footer {
 .navbar .hamburger-icon span {
   width: 30px;
   height: 3px;
-  background-color: #fafafa;
+  background: linear-gradient(to bottom, #090b0a, #b8a876, #494031);
   transition: 0.3s;
 }
 
