@@ -297,7 +297,10 @@ p {
   border: 1px solid #fafafa;
 }
 .fa-instagram:hover {
-  color: #fafafa;
+  background: #fafafa;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .fa-instagram {
   background: linear-gradient(to top, #090b0a, #b8a876, #494031);
@@ -310,10 +313,12 @@ p {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: #424242;
 }
 .fa-tiktok:hover {
-  color: #424242;
+  background: #fafafa;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .faq-item:hover {
