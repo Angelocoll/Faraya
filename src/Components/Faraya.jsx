@@ -69,6 +69,7 @@ const FarayaEvent = () => {
       <nav className={`navbar ${navBackground ? "navbar-scrolled" : ""}`}>
         <div className="logon">
           <img src={logo} alt="" />
+          <h1>Faraya Club</h1>
         </div>
 
         <div
