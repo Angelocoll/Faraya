@@ -6,10 +6,15 @@ import menu from "../assets/Faraya.pdf";
 import portfolio from "../assets/Faraya-port.png";
 import place from "../assets/place.png";
 
+import { db } from "../firebaseConfig"; 
+import { collection, getDocs, doc, getDoc} from "firebase/firestore";
+
 const FarayaEvent = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
+  const [faqList, setFaqList] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navBackground, setNavBackground] = useState(false);
+  const [aboutText, setAboutText] = useState("");
   const videoRef = useRef(null); // Använd useRef för att referera till videon
 
   // Refs för sektionerna
@@ -29,6 +34,33 @@ const FarayaEvent = () => {
         console.log("Autoplay failed:", error);
       });
     }
+  }, []);
+
+  useEffect(() => {
+    const fetchFAQs = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "FAQ")); // Hämta FAQ från Firestore
+        const faqs = querySnapshot.docs.map((doc) => doc.data()); // Extrahera datan
+        setFaqList(faqs); // Uppdatera faqList med hämtad data
+      } catch (error) {
+        console.error("Error fetching FAQs: ", error);
+      }
+    };
+    fetchFAQs();
+  }, []);
+
+  useEffect(() => {
+    const fetchAboutText = async () => {
+      const docRef = doc(db, "AboutText", "aboutText");  // Hänvisar till dokumentet "aboutText" i "AboutText"-collectionen
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const fetchedText = docSnap.data().text;
+        setAboutText(fetchedText);  // Sätt "Om oss"-texten i state
+      } else {
+        console.log("No AboutText document found.");
+      }
+    };
+    fetchAboutText();
   }, []);
 
   const handleScroll = (e, sectionRef) => {
@@ -63,6 +95,31 @@ const FarayaEvent = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const splitText = (text) => {
+    const textLength = text.length;
+
+    // Dela texten vid den sista punkten för 50%
+    const firstPartEnd = Math.floor(textLength * 0.5);
+    const firstPart = text.slice(0, firstPartEnd);
+    const firstDotIndex = firstPart.lastIndexOf(".");
+    const part1 = text.slice(0, firstDotIndex + 1); // Första delen
+
+    // Dela texten vid den sista punkten för 25%
+    const secondPartStart = firstDotIndex + 1;
+    const secondPartEnd = Math.floor(textLength * 0.75);
+    const secondPart = text.slice(secondPartStart, secondPartEnd);
+    const secondDotIndex = secondPart.lastIndexOf(".");
+    const part2 = text.slice(secondPartStart, secondPartStart + secondDotIndex + 1); // Andra delen
+
+    // Resten av texten (25%)
+    const part3 = text.slice(secondPartStart + secondDotIndex + 1); // Tredje delen
+
+    return [part1, part2, part3];
+  };
+
+
+  const [part1, part2, part3] = splitText(aboutText);
 
   return (
     <div className="container">
@@ -155,18 +212,9 @@ const FarayaEvent = () => {
           <h3>
             <em>The one and only</em>
           </h3>
-          <p>
-            Faraya Eventet grundades av Dani, en entreprenör från den natursköna
-            bergsbyn Faraya, Libanon. Driven av kärleken till sin födelseort vill han
-            hedra dess kultur och skönhet genom att skapa en exklusiv plats som
-            kombinerar show, gastronomi och underhållning.
-          </p>
-          <p>
-            Han fick en vision om att samla människor i en unik miljö där de kunde njuta av förstklassiga upplevelser.
-          </p>
-          <p>
-            Idag är Faraya Eventet en eftertraktad destination som erbjuder spektakulära shower, utsökt mat och en magisk atmosfär. Det har stärkt både lokal turism och ekonomi, samtidigt som det skapar en oförglömlig upplevelse för sina besökare.
-          </p>
+          <p>{part1}</p> {/* Första 50% av texten */}
+          <p>{part2}</p> {/* Andra 25% av texten */}
+          <p>{part3}</p> {/* Tredje 25% av texten */}
           <div className="ctaButtonBox">
             <button
               onClick={() =>
@@ -211,22 +259,16 @@ const FarayaEvent = () => {
       <section id="FAQ" className="faq" ref={faqSectionRef}>
         <div className="gradient"></div>
         <h2>Frågor</h2>
-        <div className="faq-item" onClick={() => toggleFAQ(1)}>
-          <div className="faq-question">Hur bokar man bord? ↓</div>
-          {openFAQ === 1 && <div className="faq-answer">Bokning sker via vår hemsida.</div>}
-        </div>
-        <div className="faq-item" onClick={() => toggleFAQ(2)}>
-          <div className="faq-question">Vad är Adressen? ↓</div>
-          {openFAQ === 2 && <div className="faq-answer">Adressen är XXXXXX.</div>}
-        </div>
-        <div className="faq-item" onClick={() => toggleFAQ(3)}>
-          <div className="faq-question">Hur mycket kostar det? ↓</div>
-          {openFAQ === 3 && (
-            <div className="faq-answer">
-              Det kostar 600kr per person och då ingår meza med 15 rätter, 8 varma och 7 kalla i världsklass. Det ingår även flertals shower hela kvällen lång samt entré.
+        {faqList.length === 0 ? (
+          <p>Hämtar frågor...</p>
+        ) : (
+          faqList.map((faq, index) => (
+            <div className="faq-item" key={index} onClick={() => toggleFAQ(index)}>
+              <div className="faq-question">{faq.question} ↓</div>
+              {openFAQ === index && <div className="faq-answer">{faq.answer}</div>}
             </div>
-          )}
-        </div>
+          ))
+        )}
       </section>
 
       <footer>
