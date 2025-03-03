@@ -113,10 +113,12 @@ const Admin = () => {
     localStorage.removeItem("isLoggedIn");
   };
 
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   const removeImage = async (publicId) => {
     try {
-      const response = await fetch('/api/deleteImage', {
+      console.log("Sending public_id:", publicId); // Lägg till en logg för att kontrollera publicId
+      const response = await fetch('http://localhost:3001/api/delete-Image', { // Se till att denna URL är korrekt
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,9 +137,6 @@ const Admin = () => {
       console.error('Error:', error);
     }
   };
-  
-  
-  
 
   // Ta bort en FAQ
   const handleRemoveFAQ = async (id) => {
