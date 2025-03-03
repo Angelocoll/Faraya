@@ -4,7 +4,7 @@ import logo from "../assets/Farayah-Logo-removebg.png";
 import backvideo from "../assets/newone.mp4";
 import menu from "../assets/Faraya.pdf";
 import portfolio from "../assets/Faraya-port.png";
-import place from "../assets/place.png";
+import place from "../assets/place.webp";
 //bestversiondd
 
 import { db } from "../firebaseConfig"; 
@@ -17,6 +17,7 @@ const FarayaEvent = () => {
   const [navBackground, setNavBackground] = useState(false);
   const [aboutText, setAboutText] = useState("");
   const videoRef = useRef(null); // Använd useRef för att referera till videon
+  const [images, setImages] = useState([]);
 
   // Refs för sektionerna
   const homeSectionRef = useRef(null);
@@ -62,6 +63,19 @@ const FarayaEvent = () => {
       }
     };
     fetchAboutText();
+  }, []);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "Image"));
+        const imagesData = querySnapshot.docs.map((doc) => doc.data().url); // Förutsatt att varje bild har ett "url"-fält
+        setImages(imagesData); // Sätt bilderna i state
+      } catch (error) {
+        console.error("Error fetching images: ", error);
+      }
+    };
+    fetchImages();
   }, []);
 
   const handleScroll = (e, sectionRef) => {
@@ -237,24 +251,15 @@ const FarayaEvent = () => {
       </section>
 
       <section id="gallery" className="gallery" ref={gallerySectionRef}>
-        <div>
-          <img src={place} alt="" />
-        </div>
-        <div>
-          <img src={place} alt="" />
-        </div>
-        <div>
-          <img src={place} alt="" />
-        </div>
-        <div>
-          <img src={place} alt="" />
-        </div>
-        <div>
-          <img src={place} alt="" />
-        </div>
-        <div>
-          <img src={place} alt="" />
-        </div>
+      {images.length === 0 ? (
+            <p>Laddar bilder...</p>
+          ) : (
+            images.map((imageUrl, index) => (
+              <div key={index} className="gallery-item">
+                <img src={imageUrl} alt={`Gallery image ${index + 1}`} />
+              </div>
+            ))
+          )}
       </section>
 
       <section id="FAQ" className="faq" ref={faqSectionRef}>

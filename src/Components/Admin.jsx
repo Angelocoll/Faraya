@@ -46,6 +46,12 @@ const Admin = () => {
   };
 
   const handleUpload = () => {
+
+    if (images.length >= 8) {
+      alert("Max 8 Bilder");
+      return; 
+    }
+
     const myWidget = window.cloudinary.createUploadWidget(
       {
         cloudName: "dajhncx2u", // Din Cloudinary cloud_name
@@ -54,7 +60,8 @@ const Admin = () => {
         multiple: false, // Tillåt bara en bild
         showAdvancedOptions: false, // Visa inte avancerade alternativ
         autoMinify: true, // Minifiera bilder automatiskt
-        maxFileSize: 2000000, // Max storlek på filen 2MB
+        maxFileSize: 400000, 
+        // Max storlek på filen 0,4MB då kan man ha 8 bilder som tar 3,2mb per besökare ungefär 8000 besökare om man maxar galleriet
       },
       async (error, result) => {
         if (!error && result && result.event === "success") {
@@ -229,7 +236,7 @@ const Admin = () => {
             <div style={{display:"flex", flexDirection:"column"}}>
 
             <button onClick={handleUpload}>Upload image</button>
-            <button style={{backgroundColor:"red"}} onClick={hanteraRadering}>del all</button>
+            {/*<button style={{backgroundColor:"red"}} onClick={hanteraRadering}>del all</button>*/}
             </div>
           </div>
 
