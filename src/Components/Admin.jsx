@@ -8,6 +8,8 @@ import { doc, addDoc, setDoc, getDoc, collection, getDocs, deleteDoc } from "fir
 const Admin = () => {
   const correctUsername = "admin";
   const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+  console.log("Env password:", import.meta.env.VITE_ADMIN_PASSWORD);
+
 
   // State för inloggning, text och bilder
   const [username, setUsername] = useState("");
