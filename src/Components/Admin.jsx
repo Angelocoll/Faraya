@@ -64,7 +64,6 @@ const Admin = () => {
             // Försök att lägga till bilden i Firestore
             await addDoc(collection(db, "Image"), {
                 url: result.info.secure_url,
-                public_id: publicId,
               });
               fetchImages();
           } catch (firestoreError) {
@@ -113,30 +112,30 @@ const Admin = () => {
     localStorage.removeItem("isLoggedIn");
   };
 
-  const API_URL = import.meta.env.VITE_BACKEND_URL;
-
-  const removeImage = async (publicId) => {
+  const removeImage = async (imageUrl) => {
     try {
-      console.log("Sending public_id:", publicId); // Lägg till en logg för att kontrollera publicId
-      const response = await fetch('http://localhost:3001/api/delete-Image', { // Se till att denna URL är korrekt
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ public_id: publicId }),
-      });
+      // Hämta alla bilder i Firestore
+      const querySnapshot = await getDocs(collection(db, "Image"));
+      
+      // Hitta dokumentet som matchar bildens URL
+      const imageDoc = querySnapshot.docs.find(doc => doc.data().url === imageUrl);
   
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Image deleted successfully:', data);
+      if (imageDoc) {
+        // Radera dokumentet från Firestore
+        await deleteDoc(doc(db, "Image", imageDoc.id));
+  
+        // Uppdatera UI genom att hämta bilder igen
+        fetchImages();
+  
+        alert("Bilden har raderats!");
       } else {
-        const error = await response.json();
-        console.error('Error deleting image:', error);
+        alert("Bilden hittades inte i Firestore.");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Fel vid radering av bild:", error);
     }
   };
+  
 
   // Ta bort en FAQ
   const handleRemoveFAQ = async (id) => {
@@ -177,6 +176,27 @@ const Admin = () => {
       alert("Fråga och svar kan inte vara tomma!");
     }
   };
+  const hanteraRadering = async () => {
+    const bekräftelse = window.confirm("Är du säker på att du vill radera ALLA bilder från Cloudinary? Detta kan inte ångras!");
+
+    if (bekräftelse) {
+      try {
+        const response = await fetch('http://localhost:5003/radera-alla-bilder', { // Ersätt med din serverside-URL
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          alert("Alla bilder har raderats.");
+        } else {
+          const errorData = await response.json();
+          alert("Ett fel uppstod vid raderingen: " + errorData.message);
+        }
+      } catch (error) {
+        console.error("Fel vid radering:", error);
+        alert("Ett fel uppstod vid raderingen.");
+      }
+    }
+}
 
   // Spara bilder i Firebase
   const handleSaveImages = async () => {
@@ -202,11 +222,15 @@ const Admin = () => {
               {images.map((image, index) => (
                 <div key={index} className="image-item">
                   <img src={image} alt={`uploaded ${index}`} className="preview-img" />
-                  <button onClick={() => removeImage(index)}>Ta bort</button>
+                  <button onClick={() => removeImage(image)}>Ta bort</button>
                 </div>
               ))}
             </div>
+            <div style={{display:"flex", flexDirection:"column"}}>
+
             <button onClick={handleUpload}>Upload image</button>
+            <button style={{backgroundColor:"red"}} onClick={hanteraRadering}>del all</button>
+            </div>
           </div>
 
           {/* Om oss - Textarea */}
