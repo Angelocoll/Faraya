@@ -5,7 +5,7 @@ import backvideo from "../assets/newone.mp4";
 import menu from "../assets/Faraya.pdf";
 import portfolio from "../assets/Faraya-port.png";
 import place from "../assets/place.png";
-
+//bestversion
 
 import { db } from "../firebaseConfig"; 
 import { collection, getDocs, doc, getDoc} from "firebase/firestore";
