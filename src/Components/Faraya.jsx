@@ -20,6 +20,7 @@ const FarayaEvent = () => {
   const videoRef = useRef(null); // Använd useRef för att referera till videon
   const [images, setImages] = useState([]);
   const [showVideo, setShowVideo] = useState(true);
+  const [showsVideo, setShowsVideo] = useState(false);
 
   // Refs för sektionerna
   const homeSectionRef = useRef(null);
@@ -253,7 +254,11 @@ const FarayaEvent = () => {
             `}</style>
           </div>
         ) : (
-          <img src={posterSrc} alt="Fallback-bild" style={{ width: '100%' }} />
+          
+         <div>
+           <img src={posterSrc} alt="Fallback-bild" style={{ width: '100%' }} />
+
+         </div> 
         )}
         
         <div className="hero-content">
