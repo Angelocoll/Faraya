@@ -42,15 +42,20 @@ const FarayaEvent = () => {
         });
         video.addEventListener('loadedmetadata', () => {
           if (video.classList.contains('show-poster')) {
-            // Dölj knappen med JavaScript
-            const playButton = video.querySelector(
-              '::-webkit-media-controls-play-button'
-            );
-            if (playButton) {
-              playButton.style.display = 'none';
-            }
+              console.log("show-poster class is active");
+              if (video.shadowRoot) {
+                  console.log("Shadow DOM found:", video.shadowRoot);
+                  const playButton = video.shadowRoot.querySelector('.media-controls-container');
+                  console.log("Play button found:", playButton);
+                  if (playButton) {
+                      playButton.style.display = 'none';
+                      console.log("Play button hidden");
+                  }
+              } else {
+                  console.log("ShadowRoot not found");
+              }
           }
-        })
+      });
     }
   }, []);
 
