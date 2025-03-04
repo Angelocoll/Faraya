@@ -19,6 +19,7 @@ const FarayaEvent = () => {
   const [aboutText, setAboutText] = useState("");
   const videoRef = useRef(null); // Använd useRef för att referera till videon
   const [images, setImages] = useState([]);
+  const [showVideo, setShowVideo] = useState(true);
 
   // Refs för sektionerna
   const homeSectionRef = useRef(null);
@@ -30,33 +31,19 @@ const FarayaEvent = () => {
     const video = videoRef.current;
 
     if (video) {
-        video.muted = true;
-        video.play()
-            .then(() => {
-                console.log("Video started playing");
-            })
-            .catch((error) => {
-                console.log("Autoplay failed:", error);
-                video.classList.add('show-poster');
-                // Använd en alternativ metod om Shadow DOM inte finns
-                if (!video.shadowRoot) {
-                    console.log("ShadowRoot not found: Using alternative method");
-                    // Implementera din alternativa metod här
-                }
-            });
-
-        video.addEventListener('loadedmetadata', () => {
-            if (video.classList.contains('show-poster')) {
-                console.log("show-poster class is active");
-                if (video.shadowRoot) {
-                    // ... (Shadow DOM-kod)
-                } else {
-                    console.log("ShadowRoot not found");
-                }
-            }
+      video.muted = true;
+      video
+        .play()
+        .then(() => {
+          console.log("Video started playing");
+        })
+        .catch((error) => {
+          console.log("Autoplay failed:", error);
+          setShowVideo(false); // Sätt showVideo till false
         });
     }
-}, []);
+  }, []);
+
 
   useEffect(() => {
     const fetchFAQs = async () => {
@@ -220,50 +207,54 @@ const FarayaEvent = () => {
           </div>
       <header  id="home" ref={homeSectionRef} className="hero">
         <div className="shadow"></div>
-        <div style={{ position: 'relative' }}>
-  <video
-    id="Video"
-    ref={videoRef}
-    preload="auto"
-    autoPlay
-    loop
-    muted
-    playsInline
-    className="hero-video"
-    poster={posterSrc}
-  >
-    <source src={backvideo} />
-    Din webbläsare stöder inte videouppspelning.
-  </video>
-  <div className="poster-overlay"></div>
-  <style jsx>{`
-    video {
-      position: relative;
-      z-index: 1; /* Sätter videon under poster-bilden */
-    }
+        {showVideo ? (
+          <div style={{ position: 'relative' }}>
+            <video
+              id="Video"
+              ref={videoRef}
+              preload="auto"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="hero-video"
+              poster={posterSrc}
+            >
+              <source src={backvideo} />
+              Din webbläsare stöder inte videouppspelning.
+            </video>
+            <div className="poster-overlay"></div>
+            <style jsx>{`
+              video {
+                position: relative;
+                z-index: 1;
+              }
 
-    .poster-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('${posterSrc}');
-      background-size: cover;
-      background-position: center;
-      z-index: 2; /* Sätter poster-bilden över videon */
-      display: none; /* Döljer bilden som standard */
-    }
+              .poster-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url('${posterSrc}');
+                background-size: cover;
+                background-position: center;
+                z-index: 2;
+                display: none;
+              }
 
-    video.show-poster + .poster-overlay {
-      display: block; /* Visar bilden när show-poster-klassen är aktiv */
-    }
+              video.show-poster + .poster-overlay {
+                display: block;
+              }
 
-    video.show-poster > source {
-      display: none; /* Gömmer videokällan när show-poster-klassen är aktiv */
-    }
-  `}</style>
-</div>
+              video.show-poster > source {
+                display: none;
+              }
+            `}</style>
+          </div>
+        ) : (
+          <img src={posterSrc} alt="Fallback-bild" style={{ width: '100%' }} />
+        )}
         
         <div className="hero-content">
           <div className="logo">
