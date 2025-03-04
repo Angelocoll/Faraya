@@ -40,6 +40,17 @@ const FarayaEvent = () => {
           // Visa poster-bilden genom att lägga till en klass
           video.classList.add('show-poster');
         });
+        video.addEventListener('loadedmetadata', () => {
+          if (video.classList.contains('show-poster')) {
+            // Dölj knappen med JavaScript
+            const playButton = video.querySelector(
+              '::-webkit-media-controls-play-button'
+            );
+            if (playButton) {
+              playButton.style.display = 'none';
+            }
+          }
+        })
     }
   }, []);
 
