@@ -5,6 +5,7 @@ import backvideo from "../assets/newone.mp4";
 import menu from "../assets/Faraya.pdf";
 import portfolio from "../assets/Faraya-port.png";
 import place from "../assets/place.webp";
+import posterSrc from "../assets/place.webp"
 //bestversiondd
 
 import { db } from "../firebaseConfig"; 
@@ -29,12 +30,16 @@ const FarayaEvent = () => {
     const video = videoRef.current;
 
     if (video) {
-      video.muted = true; // Se till att videon är mutad för autoplay
-      video.play().then(() => {
-        console.log("Video started playing");
-      }).catch((error) => {
-        console.log("Autoplay failed:", error);
-      });
+      video.muted = true;
+      video.play()
+        .then(() => {
+          console.log("Video started playing");
+        })
+        .catch((error) => {
+          console.log("Autoplay failed:", error);
+          // Visa poster-bilden genom att lägga till en klass
+          video.classList.add('show-poster');
+        });
     }
   }, []);
 
@@ -77,6 +82,8 @@ const FarayaEvent = () => {
     };
     fetchImages();
   }, []);
+
+  
 
   const handleScroll = (e, sectionRef) => {
     e.preventDefault();
@@ -198,10 +205,22 @@ const FarayaEvent = () => {
           </div>
       <header  id="home" ref={homeSectionRef} className="hero">
         <div className="shadow"></div>
-        <video ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video">
+        <video id="Video" ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video" poster={posterSrc}>
           <source src={backvideo} />
           Din webbläsare stöder inte videouppspelning.
         </video>
+
+        <style>{`
+        video.show-poster {
+          background-image: url('${posterSrc}');
+          background-size: cover;
+          background-position: center;
+        }
+
+        video.show-poster > source {
+          display: none;
+        }
+      `}</style>
         
         <div className="hero-content">
           <div className="logo">
