@@ -28,16 +28,6 @@ body {
   z-index: 2;
 }
 
-.media-controls-container:has(.media-controls.inherits-border-radius),
-.media-controls.inherits-border-radius {
-  border-radius: inherit;
-  display: none !important;
-}
-.media-controls-container {
-  container-type: size;
-  display: none !important;
-}
-
 @keyframes slideDown {
   0% {
     transform: translateY(-100%); /* Startar headern utanför skärmen */

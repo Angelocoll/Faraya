@@ -216,22 +216,50 @@ const FarayaEvent = () => {
           </div>
       <header  id="home" ref={homeSectionRef} className="hero">
         <div className="shadow"></div>
-        <video id="Video" ref={videoRef} preload="auto" autoPlay loop muted playsInline className="hero-video" poster={posterSrc}>
-          <source src={backvideo} />
-          Din webbläsare stöder inte videouppspelning.
-        </video>
+        <div style={{ position: 'relative' }}>
+  <video
+    id="Video"
+    ref={videoRef}
+    preload="auto"
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="hero-video"
+    poster={posterSrc}
+  >
+    <source src={backvideo} />
+    Din webbläsare stöder inte videouppspelning.
+  </video>
+  <div className="poster-overlay"></div>
+  <style jsx>{`
+    video {
+      position: relative;
+      z-index: 1; /* Sätter videon under poster-bilden */
+    }
 
-        <style>{`
-        video.show-poster {
-          background-image: url('${posterSrc}');
-          background-size: cover;
-          background-position: center;
-        }
+    .poster-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('${posterSrc}');
+      background-size: cover;
+      background-position: center;
+      z-index: 2; /* Sätter poster-bilden över videon */
+      display: none; /* Döljer bilden som standard */
+    }
 
-        video.show-poster > source {
-          display: none;
-        }
-      `}</style>
+    video.show-poster + .poster-overlay {
+      display: block; /* Visar bilden när show-poster-klassen är aktiv */
+    }
+
+    video.show-poster > source {
+      display: none; /* Gömmer videokällan när show-poster-klassen är aktiv */
+    }
+  `}</style>
+</div>
         
         <div className="hero-content">
           <div className="logo">
