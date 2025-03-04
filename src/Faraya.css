@@ -28,6 +28,12 @@ body {
   z-index: 2;
 }
 
+video.show-poster::-webkit-media-controls-play-button,
+video.show-poster::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
 @keyframes slideDown {
   0% {
     transform: translateY(-100%); /* Startar headern utanför skärmen */
