@@ -33,6 +33,11 @@ video.show-poster::-webkit-media-controls-start-playback-button {
   display: none !important;
   -webkit-appearance: none;
 }
+.media-controls-container:has(.media-controls.inherits-border-radius),
+.media-controls.inherits-border-radius {
+  border-radius: inherit;
+  display: none;
+}
 
 @keyframes slideDown {
   0% {
