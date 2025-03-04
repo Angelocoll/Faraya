@@ -30,34 +30,33 @@ const FarayaEvent = () => {
     const video = videoRef.current;
 
     if (video) {
-      video.muted = true;
-      video.play()
-        .then(() => {
-          console.log("Video started playing");
-        })
-        .catch((error) => {
-          console.log("Autoplay failed:", error);
-          // Visa poster-bilden genom att lägga till en klass
-          video.classList.add('show-poster');
+        video.muted = true;
+        video.play()
+            .then(() => {
+                console.log("Video started playing");
+            })
+            .catch((error) => {
+                console.log("Autoplay failed:", error);
+                video.classList.add('show-poster');
+                // Använd en alternativ metod om Shadow DOM inte finns
+                if (!video.shadowRoot) {
+                    console.log("ShadowRoot not found: Using alternative method");
+                    // Implementera din alternativa metod här
+                }
+            });
+
+        video.addEventListener('loadedmetadata', () => {
+            if (video.classList.contains('show-poster')) {
+                console.log("show-poster class is active");
+                if (video.shadowRoot) {
+                    // ... (Shadow DOM-kod)
+                } else {
+                    console.log("ShadowRoot not found");
+                }
+            }
         });
-        video.addEventListener('loadeddata', () => {
-          if (video.classList.contains('show-poster')) {
-              console.log("show-poster class is active");
-              if (video.shadowRoot) {
-                  console.log("Shadow DOM found:", video.shadowRoot);
-                  const playButton = video.shadowRoot.querySelector('.media-controls-container');
-                  console.log("Play button found:", playButton);
-                  if (playButton) {
-                      playButton.style.display = 'none';
-                      console.log("Play button hidden");
-                  }
-              } else {
-                  console.log("ShadowRoot not found");
-              }
-          }
-      });
     }
-  }, []);
+}, []);
 
   useEffect(() => {
     const fetchFAQs = async () => {
