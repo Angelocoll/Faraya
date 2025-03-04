@@ -40,7 +40,7 @@ const FarayaEvent = () => {
           // Visa poster-bilden genom att lägga till en klass
           video.classList.add('show-poster');
         });
-        video.addEventListener('loadedmetadata', () => {
+        video.addEventListener('loadeddata', () => {
           if (video.classList.contains('show-poster')) {
               console.log("show-poster class is active");
               if (video.shadowRoot) {
