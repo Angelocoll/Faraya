@@ -367,6 +367,9 @@ footer {
   text-align: center;
   padding-bottom: 20px;
 }
+footer p {
+  padding: 10px;
+}
 .gradient {
   width: 100%;
   margin-bottom: 20px;
@@ -442,6 +445,9 @@ footer {
 }
 /* Responsivitet */
 @media (max-width: 768px) {
+  footer div {
+    flex-direction: column;
+  }
   .navbar ul {
     display: none; /* Hide the navbar by default */
   }

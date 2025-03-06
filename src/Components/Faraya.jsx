@@ -336,7 +336,14 @@ const FarayaEvent = () => {
       </section>
 
       <footer>
+        <div style={{display: "flex", justifyContent: "space-between"}}>
+      
+          <a className="Hitta" href="https://www.google.com/maps/place/Ursvik+Entr%C3%A9/@59.3809759,17.936694,19.88z/data=!4m6!3m5!1s0x465f9e687f7f25a3:0x44d7b79da132cf0d!8m2!3d59.3809461!4d17.9368551!16s%2Fg%2F11gdyg47sk?entry=ttu&g_ep=EgoyMDI1MDMwMy4wIKXMDSoASAFQAw%3D%3D">
+        <p className="Adress">Rissneleden 110, Sundbyberg
+         </p>
+        </a>
         <p className="phone">Faraya: 076 xxx xx xx</p>
+        </div>
         <div className="gradient"></div>
         <p>@ 2025 Faraya</p>
       </footer>
