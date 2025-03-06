@@ -342,7 +342,7 @@ const FarayaEvent = () => {
         <p className="Adress">Rissneleden 110, Sundbyberg
          </p>
         </a>
-        <p className="phone">Faraya: 076 xxx xx xx</p>
+        <p className="phone">Faraya: 076 413 08 53</p>
         </div>
         <div className="gradient"></div>
         <p>@ 2025 Faraya</p>
