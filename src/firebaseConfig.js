@@ -8,9 +8,11 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 
+const FirebaseApiKey = import.meta.env.VITE_FIREBASE_API_KEY;
+
 // Din Firebase-konfiguration (hämta den från Firebase Console)
 const firebaseConfig = {
-  apiKey: "AIzaSyB_MJHfOr56-6nORjyCdeYJSDDtN0pyajE",
+  apiKey: FirebaseApiKey,
   authDomain: "faraya-ad6af.firebaseapp.com",
   projectId: "faraya-ad6af",
   storageBucket: "faraya-ad6af.firebasestorage.app",
