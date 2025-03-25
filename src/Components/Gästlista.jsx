@@ -40,14 +40,22 @@ const Gästlista = () => {
     try {
       // Hämta data från API:et
       const svar = await fetch(`/api/proxy?auth_hash=${HASH}&restid=${API_ID}&email=${email}`);
-      
-
+  
+   
   
       if (!svar.ok) {
         // Om HTTP-status inte är OK (t.ex. 404 eller 500)
         throw new Error(`HTTP-fel: ${svar.status} - ${svar.statusText}`);
       }
   
+      // Logga hela svaret som text (för att se om det är HTML)
+      const textData = await svar.text();
+     
+  
+      // Kontrollera om svaret är HTML (detta kan vara en felsida)
+      if (textData.includes('<!DOCTYPE html>')) {
+        throw new Error("Fel: Servern skickade HTML istället för JSON.");
+      }
   
       // Försök att tolka svaret som JSON
       let data;
