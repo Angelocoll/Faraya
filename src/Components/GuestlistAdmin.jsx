@@ -169,11 +169,11 @@ const GuestlistAdmin = () => {
           <button onClick={visaBokningarIgen}>Tillbaka</button>
           <h2>Incheckade gäster för {valtDatum}</h2>
           {incheckadeGäster.length > 0 ? (
-            <ul>
+            <ol>
               {incheckadeGäster.map((gäst, index) => (
                 <li key={index}>{gäst}</li>
               ))}
-            </ul>
+            </ol>
           ) : (
             <p>Inga gäster har checkats in ännu.</p>
           )}
@@ -197,7 +197,7 @@ const GuestlistAdmin = () => {
           <div className="listor">
             <ul>
               {filtreradeBokningar.map((bokning) => (
-                <li key={bokning.id} onClick={() => setValdBokning(bokning)}>
+                <li className='Knapp' key={bokning.id} onClick={() => setValdBokning(bokning)}>
                   {bokning.bookingName} - {bokning.date}
                 </li>
               ))}

@@ -76,6 +76,16 @@ button:focus-visible {
   display: flex;
   flex-direction: row;
 }
+.Knapp:hover {
+  cursor: pointer;
+  background-color: grey;
+}
+.GuestlistAdmin ul {
+  list-style: none;
+}
+.GuestlistAdmin h2 {
+  text-align: center;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
