@@ -39,7 +39,7 @@ const Gästlista = () => {
     
     try {
       // Hämta data från API:et
-      const svar = await fetch(`/wa-api/searchBooking?auth_hash=8e7eec36d57704ec37f2040f7d633cc4&restid=2905&email=saryzahir02@gmail.com`);
+      const svar = await fetch(`/wa-api/searchBooking?auth_hash=${HASH}&restid=${API_ID}&email=${email}`);
       console.log("svar", svar);
   
       if (!svar.ok) {
