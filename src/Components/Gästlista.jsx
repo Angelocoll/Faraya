@@ -51,7 +51,12 @@ const Gästlista = () => {
       const textData = await svar.text();
       console.log("API-svar som text:", textData);
   
-      // Försök att tolka svaret som JSON, om det misslyckas (om det är HTML) kommer vi att fånga det
+      // Kontrollera om svaret är HTML (detta kan vara en felsida)
+      if (textData.includes('<!DOCTYPE html>')) {
+        throw new Error("Fel: Servern skickade HTML istället för JSON.");
+      }
+  
+      // Försök att tolka svaret som JSON
       let data;
       try {
         data = JSON.parse(textData);
@@ -111,6 +116,7 @@ const Gästlista = () => {
       setLaddar(false);
     }
   };
+  
   
 
   const hanteraEmailChange = (event) => {
