@@ -52,6 +52,30 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+.GuestlistAdmin form {
+  display: flex;
+  flex-direction: column;
+}
+.GuestlistAdmin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+.GuestlistAdmin div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.GuestlistAdmin ul {
+  padding: 1rem;
+}
+.GuestlistAdmin .listor {
+  display: flex;
+  flex-direction: row;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
