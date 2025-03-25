@@ -34,34 +34,52 @@ const Gästlista = () => {
   
   const hämtaBokningar = async () => {
     const idag = new Date();
-console.log("idag", idag);
+    console.log("idag", idag);
     setLaddar(true);
+    
     try {
+      // Hämta data från API:et
       const svar = await fetch(`/wa-api/searchBooking?auth_hash=${HASH}&restid=${API_ID}&email=${email}`);
       console.log("svar", svar);
-      
-      if (!svar.ok) throw new Error(`HTTP-fel: ${svar.status}`);
-      
-      const data = await svar.json();
-      
+  
+      if (!svar.ok) {
+        // Om HTTP-status inte är OK (t.ex. 404 eller 500)
+        throw new Error(`HTTP-fel: ${svar.status} - ${svar.statusText}`);
+      }
+  
+      // Logga hela svaret som text (för att se om det är HTML)
+      const textData = await svar.text();
+      console.log("API-svar som text:", textData);
+  
+      // Försök att tolka svaret som JSON, om det misslyckas (om det är HTML) kommer vi att fånga det
+      let data;
+      try {
+        data = JSON.parse(textData);
+      } catch (jsonError) {
+        throw new Error("Fel: Servern skickade inte JSON, utan HTML eller annat format.");
+      }
+  
+      // Kontrollera om data har bookings, annars ge ett felmeddelande
+      if (!data.bookings) {
+        throw new Error("Fel: Ingen bokningsdata mottogs från servern.");
+      }
+  
       const bokning = data.bookings.find(b => b.guest.email === email);
-
+  
       if (!bokning) {
         setFel("Ingen bokning hittades för denna e-postadress.");
         setLaddar(false);
         return;
       }
-
+  
       // Kolla om bokningen är i framtiden
-      const idag = new Date();
       const bokningsDatum = new Date(bokning.date);
-
       if (bokningsDatum < idag.setHours(0, 0, 0, 0)) { // Jämför endast datum, inte tid
         setFel("Din bokning har redan passerat och kan inte längre användas.");
         setLaddar(false);
         return;
       }
-
+  
       // Spara bokningsuppgifter
       setAntalPersoner(bokning.amount);
       setFörstaGäst({
@@ -70,7 +88,7 @@ console.log("idag", idag);
       });
       setBookingName(`${bokning.guest.firstname} ${bokning.guest.lastname}`);
       setDate(bokning.date);
-
+  
       // Kolla om gästlistan finns i Firestore
       const gästlista = await kollaEmailIFirestore(email);
       if (gästlista) {
@@ -79,20 +97,21 @@ console.log("idag", idag);
           const [firstname, lastname] = name.split(' ');
           return { firstname, lastname };
         });
-
         setGäster(gamlaGäster);
       } else {
         // Om ingen gästlista finns i Firestore, lämna fälten tomma
         setGäster(Array.from({ length: bokning.amount }, () => ({ firstname: '', lastname: '' })));
       }
-
+  
     } catch (error) {
+      // Logga och visa detaljerade felmeddelanden
       console.error("Fel vid hämtning:", error);
       setFel(error.message);
     } finally {
       setLaddar(false);
     }
-};
+  };
+  
 
   const hanteraEmailChange = (event) => {
     setEmail(event.target.value);  // Uppdatera e-postadress när användaren skriver
