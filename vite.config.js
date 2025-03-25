@@ -1,9 +1,13 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
 export default defineConfig({
-  // vite.config.js
-
-  plugins: [react()],
+  server: {
+    proxy: {
+      "/wa-api": {
+        target: "https://app.waiteraid.com",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });

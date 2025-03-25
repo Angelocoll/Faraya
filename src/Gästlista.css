@@ -1,0 +1,26 @@
+.Guestlist form {
+  display: flex;
+  flex-direction: column;
+}
+#root {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Guestlist h1 {
+  margin: 2rem;
+  font-size: 4rem;
+  text-align: center;
+}
+.Guestlist form input {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.Guestlist h3 {
+  margin-bottom: 0;
+  margin-top: 20px;
+}
+.Guestlist form div {
+  padding: 1rem;
+}

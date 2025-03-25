@@ -21,6 +21,7 @@ const FarayaEvent = () => {
   const [images, setImages] = useState([]);
   const [showVideo, setShowVideo] = useState(true);
   const [showsVideo, setShowsVideo] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   // Refs för sektionerna
   const homeSectionRef = useRef(null);
@@ -43,6 +44,21 @@ const FarayaEvent = () => {
           setShowVideo(false); // Sätt showVideo till false
         });
     }
+  }, []);
+
+
+  useEffect(() => {
+    // Funktion som kollar om modal-overlay finns i DOM
+    const checkBookingModal = () => {
+      const modal = document.querySelector(".bb_modaloverlay");
+      setIsBookingOpen(!!modal); // Om modal finns -> true, annars false
+    };
+
+    // Observerar DOM-förändringar
+    const observer = new MutationObserver(checkBookingModal);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect(); // Rensa observer vid avmontering
   }, []);
 
 
@@ -147,7 +163,7 @@ const FarayaEvent = () => {
   const [part1, part2, part3] = splitText(aboutText);
 
   return (
-    <div className="container">
+    <div className={`container ${isBookingOpen ? "blurred-background" : ""}`}>
       <nav className={`navbar ${navBackground ? "navbar-scrolled" : ""}`}>
         <div className="logon">
           <img src={logo} alt="" />
@@ -186,14 +202,11 @@ const FarayaEvent = () => {
             </li>
             <span> | </span>
             <li
+            data-hash="cb2befb6ee8bf3ce782aee340dcdd0ed"
               onClick={() => {
-                window.open(
-                  "https://app.bokabord.se/reservation/?hash=cb2befb6ee8bf3ce782aee340dcdd0ed&version=new&mealid=47167&fbclid=PAZXh0bgNhZW0CMTEAAaZHG1wlEWO-sLxN-_PXlvIqn3boIeZagUFslAQspAYe0e0gYUbsou6b1rc_aem_3rjD3fidNy-cMGfdU1w8FA",
-                  "_blank"
-                )
                 setMenuOpen(false);
               }}
-              className="cta-button"
+              className="cta-button waiteraid-widget"
             >
               Boka Bord
             </li>
@@ -207,6 +220,12 @@ const FarayaEvent = () => {
     style={{ cursor: "pointer" }}></i>
           </div>
       <header  id="home" ref={homeSectionRef} className="hero">
+      <button
+      data-hash="cb2befb6ee8bf3ce782aee340dcdd0ed" 
+              className="cta-button CBA waiteraid-widget"
+            >
+              Boka Bord
+            </button>
         <div className="shadow"></div>
         {showVideo ? (
           <div style={{ position: 'relative' }}>
@@ -290,13 +309,9 @@ const FarayaEvent = () => {
           <p>{part3}</p> {/* Tredje 25% av texten */}
           <div className="ctaButtonBox">
             <button
-              onClick={() =>
-                window.open(
-                  "https://app.bokabord.se/reservation/?hash=cb2befb6ee8bf3ce782aee340dcdd0ed&version=new&mealid=47167&fbclid=PAZXh0bgNhZW0CMTEAAaZHG1wlEWO-sLxN-_PXlvIqn3boIeZagUFslAQspAYe0e0gYUbsou6b1rc_aem_3rjD3fidNy-cMGfdU1w8FA",
-                  "_blank"
-                )
-              }
-              className="cta-button port"
+            data-hash="cb2befb6ee8bf3ce782aee340dcdd0ed"
+             
+              className="cta-button port waiteraid-widget"
             >
               Boka Bord
             </button>
@@ -310,7 +325,7 @@ const FarayaEvent = () => {
 
       <section id="gallery" className="gallery" ref={gallerySectionRef}>
       {images.length === 0 ? (
-            <p>Laddar bilder...</p>
+            <p>Loading....</p>
           ) : (
             images.map((imageUrl, index) => (
               <div key={index} className="gallery-item">

@@ -38,10 +38,26 @@ body {
 }
 @keyframes slideLeft {
   0% {
-    transform: translateX(200%); /* Startar headern utanför skärmen */
+    transform: translateX(200%);
   }
   100% {
-    transform: translateX(0); /* Slutar headern på sin normala position */
+    transform: translateX(0);
+  }
+}
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 .hero,
@@ -88,6 +104,7 @@ footer,
   height: 100%;
   object-fit: cover;
   z-index: 1;
+  animation: fadeIn 2s ease-in forwards;
 }
 
 .navbar {
@@ -416,6 +433,14 @@ footer p {
   background: linear-gradient(to left, #090b0a, #b8a876, #494031);
   transition: 0.3s;
 }
+.CBA {
+  z-index: 9999;
+  font-size: 36px;
+  border-color: #b8a876;
+  transition: border-color 0.5s ease-in-out;
+  margin-top: 0;
+  margin-bottom: 40px;
+}
 
 /* Hamburger Icon Animation */
 .navbar .hamburger-icon.open span:nth-child(1) {
@@ -442,6 +467,11 @@ footer p {
   font-size: 32px;
   z-index: 2;
   animation: slideLeft 1s ease-out forwards;
+}
+
+.blurred-background {
+  filter: blur(6px);
+  pointer-events: none;
 }
 /* Responsivitet */
 @media (max-width: 768px) {
@@ -470,11 +500,11 @@ footer p {
     height: 100vh; /* Set the height to 100% of the screen */
     position: fixed; /* Use fixed positioning to keep it in place on scroll */
     top: 0; /* Align it to the top of the screen */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust for perfect centering */
+    left: 0; /* Center horizontally */
+    transform: translateX(0);
     background-color: #090b0a; /* Set a background color (for visibility) */
     z-index: 1000; /* Make sure it stays on top of other content */
-
+    animation: slideRight 0.3s ease;
     margin: 0;
     justify-content: center;
   }
