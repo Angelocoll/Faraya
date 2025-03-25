@@ -11,7 +11,7 @@ const GuestlistAdmin = () => {
   const [uniktDatum, setUniktDatum] = useState([]);
   const [valtDatum, setValtDatum] = useState('');
   const [checkadeGäster, setCheckadeGäster] = useState({}); // Ställ in checkade gäster
-  const [incheckadeGäster, setIncheckadeGäster] = useState([]); // Lista av incheckade gäster
+  const [incheckadeGäster, setIncheckadeGäster] = useState([]); 
   const [visarEndastIncheckade, setVisarEndastIncheckade] = useState(false);
   const ADMIN_PASSWORD = import.meta.env.VITE_GuestADMIN_PASSWORD;
 
