@@ -39,7 +39,7 @@ const Gästlista = () => {
     
     try {
       // Hämta data från API:et
-      const svar = await fetch(`/wa-api/searchBooking?auth_hash=${HASH}&restid=${API_ID}&email=${email}`);
+      const svar = await fetch(`https://app.waiteraid.com/wa-api/searchBooking?auth_hash=${HASH}&restid=${API_ID}&email=${email}`);
       console.log("svar", svar);
   
       if (!svar.ok) {
