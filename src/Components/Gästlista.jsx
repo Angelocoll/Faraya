@@ -16,6 +16,7 @@ const Gästlista = () => {
 
   const HASH = import.meta.env.VITE_GUESTLIST_HASH;
   const API_ID = import.meta.env.VITE_GUESTLIST_ID;
+  //test
 
   // Funktion för att kolla om e-post finns i Firestore
   const kollaEmailIFirestore = async (email) => {
