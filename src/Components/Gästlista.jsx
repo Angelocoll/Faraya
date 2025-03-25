@@ -38,6 +38,7 @@ console.log("idag", idag);
     setLaddar(true);
     try {
       const svar = await fetch(`/wa-api/searchBooking?auth_hash=${HASH}&restid=${API_ID}&email=${email}`);
+      console.log("svar", svar);
       
       if (!svar.ok) throw new Error(`HTTP-fel: ${svar.status}`);
       
