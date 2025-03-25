@@ -8,7 +8,6 @@ export default async function handler(req, res) {
     const response = await fetch(
       `https://app.waiteraid.com/wa-api/searchBooking?auth_hash=${auth_hash}&restid=${restid}&email=${email}`
     );
-    //app.waiteraid.com/wa-api/searchBooking?auth_hash=8e7eec36d57704ec37f2040f7d633cc4&restid=2905&email=saryzahir02@gmail.com
 
     https: if (!response.ok) {
       throw new Error(`API-fel: ${response.status}`);
