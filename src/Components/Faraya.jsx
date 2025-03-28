@@ -220,12 +220,17 @@ const FarayaEvent = () => {
     style={{ cursor: "pointer" }}></i>
           </div>
       <header  id="home" ref={homeSectionRef} className="hero">
+      <div className="Newlogon">
+          <img src={logo} alt="" />
+          <h1>Faraya Club</h1>
+        </div>
       <button
       data-hash="cb2befb6ee8bf3ce782aee340dcdd0ed" 
               className="cta-button CBA waiteraid-widget"
             >
               Boka Bord
             </button>
+        <div className="liners"></div>
         <div className="shadow"></div>
         {showVideo ? (
           <div style={{ position: 'relative' }}>
@@ -244,7 +249,7 @@ const FarayaEvent = () => {
               Din webbläsare stöder inte videouppspelning.
             </video>
             <div className="poster-overlay"></div>
-            <style jsx>{`
+            <style>{`
               video {
                 position: relative;
                 z-index: 1;

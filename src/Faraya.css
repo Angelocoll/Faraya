@@ -27,6 +27,14 @@ body {
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 2;
 }
+.liners {
+  width: 80%;
+  height: 100%;
+  position: absolute;
+  border-left: solid 1px #b8a876;
+  border-right: solid 1px #b8a876;
+  z-index: 2;
+}
 
 @keyframes slideDown {
   0% {
@@ -111,17 +119,20 @@ footer,
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 10px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
+  justify-content: center;
   align-items: center;
   z-index: 3000;
   transition: background-color 0.3s ease;
   animation: slideDown 1s ease-out forwards;
+  border-bottom: solid 0.5px #b8a876;
 }
 .navbar-scrolled {
   background-color: #090b0a;
   box-shadow: rgb(61, 61, 61) 0px 5px 40px;
+  border-bottom: none;
 }
 .navbar div {
   margin: 0px 20px 0px 20px;
@@ -164,7 +175,7 @@ footer,
   background-color: transparent;
   border: solid 2px #b8a876;
   box-sizing: border-box;
-  color: #b8a876;
+  color: #fafafa;
   padding: 4px 22px;
   font-size: 18px;
   cursor: pointer;
@@ -179,6 +190,9 @@ footer,
 }
 .navbar span {
   color: #b8a876;
+}
+.navbar-links span {
+  display: none;
 }
 
 .cta-button:hover {
@@ -412,11 +426,27 @@ footer p {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: absolute;
+  display: none;
+}
+.Newlogon img {
+  width: 150px;
+  position: relative;
+}
+.Newlogon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: column;
+  z-index: 9999;
+}
+.Newlogon H1 {
+  font-size: 20px;
 }
 
 .navbar ul {
   display: flex;
-  gap: 20px;
+  gap: 60px;
   list-style: none;
 }
 
@@ -435,11 +465,15 @@ footer p {
 }
 .CBA {
   z-index: 9999;
-  font-size: 36px;
+  font-size: 22px;
   border-color: #b8a876;
   transition: border-color 0.5s ease-in-out;
-  margin-top: 0;
-  margin-bottom: 40px;
+  margin-top: 80px;
+  color: #b8a876;
+  padding: 5px;
+  padding-left: 40px;
+  padding-right: 40px;
+  font-weight: 100;
 }
 
 /* Hamburger Icon Animation */
@@ -485,6 +519,14 @@ footer p {
   .navbar .hamburger-icon {
     display: flex; /* Show the hamburger icon */
     z-index: 2999;
+  }
+  .navbar {
+    justify-content: end;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .liners {
+    width: 65%;
   }
 
   .navbar-links {
