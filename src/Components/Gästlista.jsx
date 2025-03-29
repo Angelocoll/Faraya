@@ -20,7 +20,7 @@ const Gästlista = () => {
 
   // Funktion för att kolla om e-post finns i Firestore
   const kollaEmailIFirestore = async (email) => {
-    const q = query(collection(db, "guestlist"), where("email", "==", email.lowerCase()));
+    const q = query(collection(db, "guestlist"), where("email", "==", email.toLowerCase()));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       return null; 
