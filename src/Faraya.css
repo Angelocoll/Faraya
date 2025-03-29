@@ -162,6 +162,7 @@ footer,
   gap: 20px;
   list-style: none;
   align-items: center;
+  padding-top: 8px;
 }
 
 .navbar li {
@@ -206,6 +207,7 @@ footer,
 }
 .navbar .cta-button {
   padding-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .navbar li {
