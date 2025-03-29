@@ -20,7 +20,7 @@ const Gästlista = () => {
 
   // Funktion för att kolla om e-post finns i Firestore
   const kollaEmailIFirestore = async (email) => {
-    const q = query(collection(db, "guestlist"), where("email", "==", email));
+    const q = query(collection(db, "guestlist"), where("email", "==", email.lowerCase()));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       return null; 
@@ -38,8 +38,8 @@ const Gästlista = () => {
     setLaddar(true);
     
     try {
-      // Hämta data från API:et
-      const svar = await fetch(`/api/proxy?auth_hash=${HASH}&restid=${API_ID}&email=${email}`);
+      const emailLower = email.toLowerCase();
+      const svar = await fetch(`/api/proxy?auth_hash=${HASH}&restid=${API_ID}&email=${emailLower}`);
   
    
   
