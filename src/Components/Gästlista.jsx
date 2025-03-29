@@ -71,7 +71,7 @@ const Gästlista = () => {
         throw new Error("Fel: Ingen bokningsdata mottogs från servern.");
       }
   
-      const bokning = data.bookings.find(b => b.guest.email === email);
+      const bokning = data.bookings.find(b => b.guest.email === email.toLowerCase());
   
       if (!bokning) {
         setFel("Ingen bokning hittades för denna e-postadress.");
