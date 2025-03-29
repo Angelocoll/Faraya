@@ -39,6 +39,7 @@ const Gästlista = () => {
     
     try {
       const emailLower = email.toLowerCase();
+      console.log("emailLower", emailLower);
       const svar = await fetch(`/api/proxy?auth_hash=${HASH}&restid=${API_ID}&email=${emailLower}`);
   
    
